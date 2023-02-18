@@ -33,7 +33,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.derodero24.just-csv",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
