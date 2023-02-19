@@ -1,13 +1,8 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'media',
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Noto Sans JP', ...defaultTheme.fontFamily.sans],
-      },
       screens: {
         xs: '475px',
         '3xl': '1920px',
