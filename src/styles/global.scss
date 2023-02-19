@@ -27,46 +27,4 @@
 }
 
 @layer components {
-  .container {
-    @apply mx-auto flex flex-col justify-center space-y-4 overflow-hidden pt-16 text-center;
-  }
-
-  h1 {
-    @apply text-center text-3xl font-semibold;
-  }
-
-  .logo {
-    @apply p-6;
-
-    &.next {
-      @apply hover:drop-shadow-[0_0_0.5rem_rgba(54,55,63,0.4)] dark:hover:drop-shadow-[0_0_0.5rem_rgba(255,255,255,0.4)];
-    }
-    &.tauri {
-      @apply hover:drop-shadow-[0_0_0.5rem_rgba(36,201,219,0.4)];
-    }
-    &.react {
-      @apply hover:drop-shadow-[0_0_0.5rem_rgba(97,218,251,0.4)];
-    }
-  }
-
-  input,
-  button[type='submit'] {
-    @apply rounded-lg border-2 border-transparent bg-white px-5 py-2 text-neutral-800 shadow-md outline-none duration-200 dark:bg-neutral-700 dark:text-white;
-  }
-
-  input {
-    @apply w-64;
-  }
-
-  button[type='submit'] {
-    @apply cursor-pointer font-medium hover:border-blue-400/80;
-  }
-
-  .row {
-    @apply flex justify-center space-x-12;
-  }
-
-  #greet-input {
-    @apply mr-2;
-  }
 }
