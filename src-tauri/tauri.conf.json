@@ -60,10 +60,12 @@
     "windows": [
       {
         "fullscreen": false,
+        "width": 800,
+        "minWidth": 400,
         "height": 600,
+        "minHeight": 400,
         "resizable": true,
-        "title": "just-csv",
-        "width": 800
+        "title": "just-csv"
       }
     ]
   }
