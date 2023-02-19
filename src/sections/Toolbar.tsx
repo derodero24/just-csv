@@ -3,7 +3,7 @@ import ToolbarGridIcon from '../components/ToolbarGridIcon';
 
 export default function Toolbar() {
   return (
-    <section className="flex justify-center space-x-12 py-1 px-4">
+    <section className="flex justify-center space-x-12 border-b border-black/40 py-1 px-4">
       <div className="flex flex-col items-center space-y-1">
         <div>
           <ToolbarGridIcon type="insert-above" />

@@ -13,7 +13,9 @@ function App() {
   return (
     <div className="flex h-screen flex-col">
       <Toolbar />
-      <GridArea />
+      <GridArea rows={data.length} columns={data[0]?.length ?? 1}>
+        aq
+      </GridArea>
       <TextArea />
       <Footer />
     </div>

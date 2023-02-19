@@ -11,6 +11,10 @@
     @apply bg-neutral-100 text-neutral-800 dark:bg-zinc-800/95 dark:text-neutral-100;
   }
 
+  body {
+    @apply m-0;
+  }
+
   // inline -> inline-block
   a,
   button,
