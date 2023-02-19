@@ -1,5 +1,5 @@
+import Separator from '../components/Separator';
 import ToolbarGridIcon from '../components/ToolbarGridIcon';
-import ToolbarSeparator from '../components/ToolbarSeparator';
 
 export default function Toolbar() {
   return (
@@ -7,23 +7,23 @@ export default function Toolbar() {
       <div className="flex flex-col items-center space-y-1">
         <div>
           <ToolbarGridIcon type="insert-above" />
-          <ToolbarSeparator />
+          <Separator />
           <ToolbarGridIcon type="insert-below" />
-          <ToolbarSeparator />
+          <Separator />
           <ToolbarGridIcon type="insert-left" />
-          <ToolbarSeparator />
+          <Separator />
           <ToolbarGridIcon type="insert-right" />
         </div>
-        <p className="text-2xs">Insert Rows/Cols</p>
+        <p className="text-2xs">Insert Rows / Columns</p>
       </div>
 
       <div className="flex flex-col items-center space-y-1">
         <div>
           <ToolbarGridIcon type="delete-row" />
-          <ToolbarSeparator />
+          <Separator />
           <ToolbarGridIcon type="delete-col" />
         </div>
-        <p className="text-2xs">Delete Rows/Cols</p>
+        <p className="text-2xs">Delete Rows / Columns</p>
       </div>
     </section>
   );

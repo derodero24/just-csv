@@ -1,4 +1,4 @@
-export default function ToolbarSeparator() {
+export default function Separator() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,7 +10,7 @@ export default function ToolbarSeparator() {
         y1="0"
         x2="0.5"
         y2="10"
-        className="stroke-black stroke-[0.5] dark:stroke-white/80"
+        className="stroke-black stroke-[0.5] dark:stroke-white/50"
       />
     </svg>
   );
