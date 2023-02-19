@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "just-csv",
+    "productName": "Just CSV",
     "version": "0.0.0"
   },
   "tauri": {
@@ -65,7 +65,7 @@
         "height": 600,
         "minHeight": 400,
         "resizable": true,
-        "title": "just-csv"
+        "title": "Just CSV"
       }
     ]
   }
