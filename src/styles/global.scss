@@ -8,11 +8,19 @@
   }
 
   :root {
-    @apply bg-neutral-100 text-neutral-800 dark:bg-zinc-800/95 dark:text-neutral-100;
+    --backgroud-color: rgb(235, 235, 238);
+    --base-text-color: rgb(24 24 27);
+    --border-color: rgb(212 212 216);
+
+    &.dark {
+      --backgroud-color: rgb(43, 43, 45);
+      --base-text-color: rgb(255 255 255);
+      --border-color: rgb(82 82 91);
+    }
   }
 
   body {
-    @apply m-0;
+    @apply m-0 bg-bg text-base-text;
   }
 
   // inline -> inline-block

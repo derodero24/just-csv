@@ -1,6 +1,6 @@
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'media',
+  darkMode: 'class',
   theme: {
     extend: {
       screens: {
@@ -12,6 +12,11 @@ module.exports = {
       },
       minHeight: {
         'inner-screen': 'calc(var(--vh, 1vh) * 100)',
+      },
+      colors: {
+        bg: 'var(--backgroud-color)',
+        'base-text': 'var(--base-text-color)',
+        border: 'var(--border-color)',
       },
     },
   },
