@@ -61,7 +61,7 @@
       {
         "fullscreen": false,
         "width": 800,
-        "minWidth": 400,
+        "minWidth": 500,
         "height": 600,
         "minHeight": 400,
         "resizable": true,
