@@ -2,7 +2,7 @@ import { RxDividerVertical } from 'react-icons/rx';
 
 export default function Footer() {
   return (
-    <footer className="absolute bottom-0 flex w-full items-center justify-between border-t border-zinc-300 bg-bg px-4 py-1 text-xs font-medium dark:border-zinc-600">
+    <footer className="bg-bg absolute bottom-0 flex w-full items-center justify-between border-t border-zinc-300 px-4 py-1 text-xs font-medium dark:border-zinc-600">
       <p className="overflow-hidden whitespace-nowrap">
         Total: 16,512 rows, 347 columns, 3,341,218 cells (23 empty)
       </p>

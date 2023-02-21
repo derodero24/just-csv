@@ -12,7 +12,7 @@ import ThemeButton from '../components/ThemeButton';
 
 export default function Header() {
   return (
-    <section className="z-10 flex h-12 w-full items-center justify-center space-x-12 border-b border-border bg-bg px-4">
+    <section className="bg-bg z-10 flex h-12 w-full items-center justify-center space-x-12 border-b border-base-border px-4">
       <div className="flex flex-col items-center">
         <div>
           <AiOutlineInsertRowAbove className="cursor-pointer text-xl text-blue-600/90 dark:text-blue-400" />
