@@ -64,6 +64,7 @@ const numberToAlphabet = (num: number, progress: string): string => {
 
 export default function TableArea() {
   const [hovered, setHovered] = useState<Coordinate>();
+  const [selected, setSelected] = useState<Coordinate>();
 
   const onMouseOver = (row: number, col: number) => {
     setHovered({ row, col });
@@ -73,8 +74,16 @@ export default function TableArea() {
     setHovered(undefined);
   };
 
+  const onMouseDown = (row: number, col: number) => {
+    setSelected({ row, col });
+  };
+
+  const onMouseUp = () => {
+    console.log('onMouseUp');
+  };
+
   return (
-    <section className="relative mb-16 grow overflow-auto">
+    <section className="relative mb-16 grow overflow-auto pb-8 pr-8">
       <table>
         <thead>
           <tr>
@@ -84,7 +93,9 @@ export default function TableArea() {
                 key={i}
                 scope="col"
                 className={
-                  'scorpe-col ' + (i === hovered?.col ? 'hovered' : '')
+                  'scorpe-col' +
+                  (i === hovered?.col ? ' hovered' : '') +
+                  (i === selected?.col ? ' selected' : '')
                 }
               >
                 {numberToAlphabet(i + 1, '')}
@@ -98,7 +109,9 @@ export default function TableArea() {
               <th
                 scope="row"
                 className={
-                  'scorpe-row ' + (i === hovered?.row ? 'hovered' : '')
+                  'scorpe-row' +
+                  (i === hovered?.row ? ' hovered' : '') +
+                  (i === selected?.row ? ' selected' : '')
                 }
               >
                 {i + 1}
@@ -106,8 +119,13 @@ export default function TableArea() {
               {row.map((val, j) => (
                 <td
                   key={j}
+                  className={
+                    i === selected?.row && j === selected.col ? 'selected' : ''
+                  }
                   onMouseOver={() => onMouseOver(i, j)}
                   onMouseLeave={onMouseLeave}
+                  onMouseDown={() => onMouseDown(i, j)}
+                  onMouseUp={onMouseUp}
                 >
                   {val}
                 </td>
