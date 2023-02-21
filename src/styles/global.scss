@@ -11,41 +11,39 @@
     --base-backgroud-color: rgb(235, 235, 238);
     --base-base-text-color: rgb(24, 24, 27);
     --base-border-color: rgb(212, 212, 216);
-    --base-accent-color: rgb(74, 143, 241);
-    --base-accent-10-color: rgba(74, 143, 241, 0.1);
-    --base-accent-20-color: rgba(74, 143, 241, 0.2);
-    --base-accent-30-color: rgba(74, 143, 241, 0.3);
 
     --th-text-color: rgb(55, 55, 58);
     --th-bg-color: rgb(222, 222, 226);
     --th-border-color: rgb(190, 190, 204);
-    --th-hovered-color: rgb(207, 207, 211);
+    --th-hovered-color: rgba(0, 0, 0, 0.05);
+    --th-selected-color: rgba(74, 143, 241, 0.3);
 
     --td-text-color: rgb(55, 55, 58);
     --td-odd-color: rgb(250, 250, 254);
     --td-even-color: rgb(242, 242, 245);
     --td-border-color: rgb(212, 212, 216);
-    --td-hovered-color: rgb(232, 232, 235);
+    --td-hovered-color: rgba(0, 0, 0, 0.05);
+    --td-selected-color: rgba(74, 143, 241, 0.1);
+    --td-border-selected-color: rgb(74, 143, 241);
 
     &.dark {
       --base-backgroud-color: rgb(46, 46, 49);
       --base-text-color: rgb(250, 250, 255);
       --base-border-color: rgb(82, 82, 91);
-      --base-accent-color: rgb(57, 123, 215);
-      --base-accent-10-color: rgba(57, 123, 215, 0.1);
-      --base-accent-20-color: rgba(57, 123, 215, 0.2);
-      --base-accent-30-color: rgba(57, 123, 215, 0.3);
 
       --th-text-color: rgb(220, 220, 225);
       --th-bg-color: rgb(57, 57, 61);
       --th-border-color: rgb(96 96 100);
-      --th-hovered-color: rgb(72, 72, 76);
+      --th-hovered-color: rgba(255, 255, 255, 0.05);
+      --th-selected-color: rgba(30, 97, 190, 0.3);
 
       --td-text-color: rgb(220, 220, 225);
       --td-odd-color: rgb(32, 32, 36);
       --td-even-color: rgb(45, 45, 49);
       --td-border-color: rgb(82 82 87);
-      --td-hovered-color: rgb(55, 55, 59);
+      --td-hovered-color: rgba(255, 255, 255, 0.05);
+      --td-selected-color: rgb(30, 97, 190, 0.1);
+      --td-border-selected-color: rgb(30, 97, 190);
     }
   }
 
@@ -69,6 +67,10 @@
 }
 
 @layer components {
+  @mixin filter {
+    @apply absolute -left-px -top-px h-[calc(100%+2px)] w-[calc(100%+2px)] content-[''];
+  }
+
   table {
     @apply relative;
   }
@@ -83,7 +85,16 @@
   }
 
   th {
-    @apply border-th-border bg-th-bg px-1 text-xs font-medium text-th-text hover:bg-th-hovered;
+    @apply border-th-border bg-th-bg px-1 text-xs font-medium text-th-text;
+
+    &:hover,
+    &.hovered {
+      @apply relative;
+      &::before {
+        @include filter;
+        @apply bg-th-hovered;
+      }
+    }
 
     &.scorpe-col {
       @apply border-r;
@@ -97,31 +108,83 @@
       @apply border-b border-r border-th-border;
     }
 
-    &.hovered {
-      @apply bg-th-hovered;
-    }
-
     &.selected {
       @apply relative;
-
-      &::before {
-        @apply absolute -left-px -top-px h-[calc(100%+2px)] w-[calc(100%+2px)] cursor-pointer bg-base-accent/30 content-[''];
+      &::after {
+        @include filter;
+        @apply bg-th-selected;
       }
     }
   }
 
   td {
-    @apply border border-td-border pl-1 pr-2 text-sm font-light text-td-text hover:bg-td-hovered;
+    @apply border border-td-border pl-1 pr-2 text-sm font-light text-td-text;
+
+    &:hover {
+      @apply relative;
+      &::before {
+        @include filter;
+        @apply bg-th-hovered;
+      }
+    }
 
     &.selected {
       @apply relative;
-
-      &::before {
-        @apply absolute -left-px -top-px h-[calc(100%+2px)] w-[calc(100%+2px)] cursor-pointer border-2 border-base-accent bg-base-accent/10 content-[''];
+      &::after {
+        @include filter;
+        @apply bg-td-selected;
       }
 
-      &::after {
-        @apply absolute -right-[3px] -bottom-[3px] h-1.5 w-1.5  bg-base-accent content-[''];
+      > .selection-border {
+        @apply absolute z-10 box-content bg-td-border-selected hover:cursor-grab;
+        // 反応領域を拡大
+        &::before,
+        &::after {
+          @apply absolute content-[''];
+        }
+      }
+
+      > .selection-border-t,
+      > .selection-border-b {
+        @apply -left-px h-0.5 w-[calc(100%+2px)];
+        &::before {
+          @apply -top-0.5 h-0.5 w-full;
+        }
+        &::after {
+          @apply -bottom-0.5 h-0.5 w-full;
+        }
+      }
+
+      > .selection-border-l,
+      > .selection-border-r {
+        @apply -top-px h-[calc(100%+2px)] w-0.5;
+        &::before {
+          @apply -left-0.5 h-full w-0.5;
+        }
+        &::after {
+          @apply -right-0.5 h-full w-0.5;
+        }
+      }
+
+      > .selection-border-t {
+        @apply -top-px;
+      }
+      > .selection-border-b {
+        @apply -bottom-px;
+      }
+      > .selection-border-l {
+        @apply -left-px;
+      }
+      > .selection-border-r {
+        @apply -right-px;
+      }
+
+      > .selection-chip {
+        @apply absolute -right-[3px] -bottom-[3px] z-10 h-1.5 w-1.5 cursor-crosshair bg-td-border-selected;
+        // 反応領域を拡大
+        &::before {
+          @apply absolute -top-px -left-px h-2 w-2 content-[''];
+        }
       }
     }
   }

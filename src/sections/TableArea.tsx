@@ -65,6 +65,7 @@ const numberToAlphabet = (num: number, progress: string): string => {
 export default function TableArea() {
   const [hovered, setHovered] = useState<Coordinate>();
   const [selected, setSelected] = useState<Coordinate>();
+  // const [editing, setEditing] = useState<Coordinate>();
 
   const onMouseOver = (row: number, col: number) => {
     setHovered({ row, col });
@@ -78,9 +79,9 @@ export default function TableArea() {
     setSelected({ row, col });
   };
 
-  const onMouseUp = () => {
-    console.log('onMouseUp');
-  };
+  // const onDoubleClick = (row: number, col: number) => {
+  //   setEditing({ row, col });
+  // };
 
   return (
     <section className="relative mb-16 grow overflow-auto pb-8 pr-8">
@@ -122,12 +123,19 @@ export default function TableArea() {
                   className={
                     i === selected?.row && j === selected.col ? 'selected' : ''
                   }
+                  // contentEditable={i === editing?.row && j === editing.col}
+                  // suppressContentEditableWarning={true}
                   onMouseOver={() => onMouseOver(i, j)}
                   onMouseLeave={onMouseLeave}
                   onMouseDown={() => onMouseDown(i, j)}
-                  onMouseUp={onMouseUp}
+                  // onDoubleClick={() => onDoubleClick(i, j)}
                 >
                   {val}
+                  <span className="selection-border selection-border-t" />
+                  <span className="selection-border selection-border-b" />
+                  <span className="selection-border selection-border-l" />
+                  <span className="selection-border selection-border-r" />
+                  <span className="selection-chip" />
                 </td>
               ))}
             </tr>
