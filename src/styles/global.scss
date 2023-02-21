@@ -92,6 +92,10 @@
     &.edge {
       @apply border-b border-r border-th-border;
     }
+
+    &.hovered {
+      @apply bg-th-hovered;
+    }
   }
 
   td {

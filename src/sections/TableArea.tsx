@@ -4,6 +4,8 @@
 //   children: ReactNode;
 // }
 
+import { useState } from 'react';
+
 const data = [
   ['Product Product', 'Color', 'Action', 'Price', 'Action'],
   ['Product', 'Color', 'Category', '🐱', 'Category'],
@@ -61,6 +63,16 @@ const numberToAlphabet = (num: number, progress: string): string => {
 };
 
 export default function TableArea() {
+  const [hovered, setHovered] = useState<Coordinate>();
+
+  const onMouseOver = (row: number, col: number) => {
+    setHovered({ row, col });
+  };
+
+  const onMouseLeave = () => {
+    setHovered(undefined);
+  };
+
   return (
     <section className="relative mb-16 grow overflow-auto">
       <table>
@@ -68,7 +80,13 @@ export default function TableArea() {
           <tr>
             <th scope="col" className="edge"></th>
             {Array.from({ length: data[0]?.length ?? 1 }).map((_, i) => (
-              <th key={i} scope="col" className="scorpe-col">
+              <th
+                key={i}
+                scope="col"
+                className={
+                  'scorpe-col ' + (i === hovered?.col ? 'hovered' : '')
+                }
+              >
                 {numberToAlphabet(i + 1, '')}
               </th>
             ))}
@@ -77,48 +95,27 @@ export default function TableArea() {
         <tbody>
           {data.map((row, i) => (
             <tr key={i}>
-              <th scope="row" className="scorpe-row">
+              <th
+                scope="row"
+                className={
+                  'scorpe-row ' + (i === hovered?.row ? 'hovered' : '')
+                }
+              >
                 {i + 1}
               </th>
               {row.map((val, j) => (
-                <td key={j}>{val}</td>
+                <td
+                  key={j}
+                  onMouseOver={() => onMouseOver(i, j)}
+                  onMouseLeave={onMouseLeave}
+                >
+                  {val}
+                </td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
-
-      {/* <ul className="w-10 min-w-fit bg-neutral-700 text-xs">
-        <li className="py-0.5 text-center"> </li>
-        {Array.from({ length: rows }).map((_, i) => (
-          <li key={i} className="relative px-1">
-            <span className="justify-cente flex h-12 w-full cursor-pointer items-center text-center hover:bg-neutral-600">
-              {i}starstarsatsrtars
-            </span>
-            <Separator
-              type="horizontal"
-              className="absolute left-0 bottom-[-0.25rem] z-10 w-full cursor-ns-resize py-1"
-            />
-          </li>
-        ))}
-      </ul> */}
-
-      {/* <div className="flex grow flex-col">
-        <ul className="flex border-b border-white/50 bg-neutral-700 text-xs">
-          {Array.from({ length: columns }).map((_, i) => (
-            <li key={i} className="relative">
-              <span className="w-16 cursor-pointer py-0.5 text-center hover:bg-neutral-600">
-                {i}
-              </span>
-              <Separator
-                type="vertical"
-                className="absolute right-[-0.25rem] top-0 z-10 h-full cursor-ew-resize px-1"
-              />
-            </li>
-          ))}
-        </ul>
-        <div className="grow">{children}</div>
-      </div> */}
     </section>
   );
 }
