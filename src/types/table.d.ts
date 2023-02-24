@@ -1,4 +1,4 @@
-// type CellValue = string | number | boolean | null;
+type CellValue = string | number | boolean | null;
 
 // interface TableConfig {
 //   rowHeight: number;
@@ -16,12 +16,29 @@
 // }
 
 // interface Cell {
-//   x: number;
-//   y: number;
-//   value: CellValue;
+//   value: string;
+//   row: number;
+//   column: number;
+//   hovering: boolean;
+//   selecting: boolean;
 // }
+
+type TableData = string[][];
 
 interface Coordinate {
   row: number;
-  col: number;
+  column: number;
 }
+
+type Operation =
+  | null
+  | 'edit'
+  | 'select-cell'
+  | 'select-row'
+  | 'select-col'
+  | 'move-cell'
+  | 'move-row'
+  | 'move-col'
+  | 'resize-row'
+  | 'resize-col'
+  | 'autofill';
