@@ -1,48 +1,70 @@
 // interface Props {
 //   rows: number;
-//   columns: number;
+//   cols: number;
 //   children: ReactNode;
 // }
 
-import { useAtom } from 'jotai';
+import { useVirtualizer } from '@tanstack/react-virtual';
+import { useRef } from 'react';
 
 import Td from '../components/Td';
-import Th from '../components/Th';
-import { tableDataAtom } from '../stores/table';
+import ThCol from '../components/ThCol';
+import ThRow from '../components/ThRow';
 
-// const config = {
-//   rowHeaderWidth: '16rem',
-//   rowHeight: 16,
-//   colWidth: '16rem',
-// };
+interface Props {
+  data: TableData;
+}
 
-export default function TableArea() {
-  const [data] = useAtom(tableDataAtom);
+export default function TableArea({ data }: Props) {
+  const ref = useRef(null);
+  const rows = data.length;
+  const cols = data[0]?.length ?? 1;
 
-  // const [editing, setEditing] = useState<Coordinate>();
-  // console.log(Date.now());
+  const rowVirtualizer = useVirtualizer({
+    count: rows,
+    getScrollElement: () => ref.current,
+    estimateSize: () => 20,
+    overscan: 5,
+  });
 
-  // const onDoubleClick = (row: number, col: number) => {
-  //   setEditing({ row, col });
-  // };
+  const columnVirtualizer = useVirtualizer({
+    horizontal: true,
+    count: cols,
+    getScrollElement: () => ref.current,
+    estimateSize: () => 20,
+    overscan: 5,
+  });
 
   return (
     <section className="relative mb-16 grow overflow-auto pb-8 pr-8">
-      <table>
+      <table ref={ref}>
         <thead>
           <tr>
             <th scope="col" className="edge"></th>
             {Array.from({ length: data[0]?.length ?? 1 }).map((_, i) => (
-              <Th key={i} scope="col" value={i} />
+              <ThCol key={i} value={i} />
             ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((row, i) => (
+          {/* {data.map((row, i) => (
             <tr key={i}>
-              <Th key={i} scope="row" value={i} />
-              {row.map((atom, j) => (
-                <Td key={j} atom={atom} row={i} column={j} />
+              <ThRow key={i} value={i} />
+              {row.map((value, j) => (
+                <Td key={j} row={i} col={j} initialValue={value} />
+              ))}
+            </tr>
+          ))} */}
+          {rowVirtualizer.getVirtualItems().map(virtualRow => (
+            <tr key={virtualRow.index}>
+              <ThRow key={virtualRow.index} value={virtualRow.index} />
+              {columnVirtualizer.getVirtualItems().map(virtualColumn => (
+                <Td
+                  key={virtualColumn.index}
+                  row={virtualRow.index}
+                  col={virtualColumn.index}
+                  initialValue={data[virtualRow.index]![virtualColumn.index]!}
+                />
               ))}
             </tr>
           ))}

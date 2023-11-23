@@ -10,24 +10,29 @@ type CellValue = string | number | boolean | null;
 //   index: number;
 // }
 
-// interface Column {
+// interface Col {
 //   index: number;
 //   width: number;
 // }
 
-// interface Cell {
-//   value: string;
-//   row: number;
-//   column: number;
-//   hovering: boolean;
-//   selecting: boolean;
-// }
+interface Cell {
+  value: string;
+  row: number;
+  col: number;
+  hovering: boolean;
+  selecting: boolean;
+}
 
 type TableData = string[][];
 
 interface Coordinate {
   row: number;
-  column: number;
+  col: number;
+}
+
+interface CoordinateRange {
+  from: Coordinate;
+  to: Coordinate;
 }
 
 type Operation =

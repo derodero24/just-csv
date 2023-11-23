@@ -1,45 +1,70 @@
-import { PrimitiveAtom, useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
-import { hoveringAtom, selectingsAtom } from '../stores/table';
+import { selectingsAtom } from '../stores/table';
 
 interface Props {
-  atom: PrimitiveAtom<string>;
   row: number;
-  column: number;
+  col: number;
+  initialValue: string;
 }
 
-export default function Td({ atom, row, column }: Props) {
-  const [value, _] = useAtom(atom);
-  const [selectings, setSelectings] = useAtom(selectingsAtom);
-  const setHovering = useSetAtom(hoveringAtom);
+export default function Td({ row, col, initialValue }: Props) {
+  const setSelectings = useSetAtom(selectingsAtom);
+  // const setHovering = useSetAtom(hoveringAtom);
 
-  // console.log(Date.now(), row, column);
+  // console.log(Date.now(), row, col);
 
   const onMouseOver = () => {
-    setHovering({ row, column });
+    // document.getElementById(`th-row-${row}`)?.classList.add('hovered');
+    // document.getElementById(`th-col-${col}`)?.classList.add('hovered');
   };
 
   const onMouseLeave = () => {
-    setHovering(null);
+    // document.getElementById(`th-row-${row}`)?.classList.remove('hovered');
+    // document.getElementById(`th-col-${col}`)?.classList.remove('hovered');
   };
 
   const onMouseDown = () => {
-    setSelectings({ row, column });
+    // setSelectings(prev => {
+    //   // Reset previous
+    //   document
+    //     .getElementById(`td-${prev.from.row}-${prev.from.col}`)
+    //     ?.classList.remove('selected');
+    //   document
+    //     .getElementById(`th-row-${prev.from.row}`)
+    //     ?.classList.remove('selected');
+    //   document
+    //     .getElementById(`th-col-${prev.from.col}`)
+    //     ?.classList.remove('selected');
+    //   // Setup new
+    //   document.getElementById(`td-${row}-${col}`)?.classList.add('selected');
+    //   document.getElementById(`th-row-${row}`)?.classList.add('selected');
+    //   document.getElementById(`th-col-${col}`)?.classList.add('selected');
+    //   return {
+    //     from: { row, col },
+    //     to: { row, col },
+    //   };
+    // });
+    // setSelectings({ row, col });
+    // document.getElementById('')
   };
 
   return (
     <td
-      className={
-        row === selectings.row && column === selectings.column ? 'selected' : ''
-      }
+      id={`td-${row}-${col}`}
+      className={`row-${row} col-${col}`}
+      // className={
+      //   row === selectings.row && col === selectings.col ? 'selected' : ''
+      // }
       // contentEditable={i === editing?.row && j === editing.col}
       // suppressContentEditableWarning={true}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
       onMouseDown={onMouseDown}
       // onDoubleClick={() => onDoubleClick(i, j)}
+      // contentEditable
     >
-      {value}
+      {initialValue}
       <span className="selection-border selection-border-t" />
       <span className="selection-border selection-border-b" />
       <span className="selection-border selection-border-l" />

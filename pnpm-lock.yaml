@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@tanstack/react-virtual': 3.0.0-beta.49
   '@tauri-apps/api': ^1.2.0
   '@tauri-apps/cli': ^1.2.3
   '@tsconfig/strictest': ^1.0.2
@@ -30,6 +31,7 @@ specifiers:
   typescript: ^4.9.5
 
 dependencies:
+  '@tanstack/react-virtual': 3.0.0-beta.49_react@18.2.0
   '@tauri-apps/api': 1.2.0
   autoprefixer: 10.4.13_postcss@8.4.21
   csv-parse: 5.3.5
@@ -271,6 +273,19 @@ packages:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
     dependencies:
       tslib: 2.5.0
+    dev: false
+
+  /@tanstack/react-virtual/3.0.0-beta.49_react@18.2.0:
+    resolution: {integrity: sha512-bd7WBHu1LUBbs3qYZnvWSo4AhcSysc/QyBoHpGK2XOMTXzP9D4FVISMfCvdIbi+JoTqdZqhtaV7c1WY5gzZRlQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@tanstack/virtual-core': 3.0.0-beta.49
+      react: 18.2.0
+    dev: false
+
+  /@tanstack/virtual-core/3.0.0-beta.49:
+    resolution: {integrity: sha512-tPmuUiQwUW3PdQirBjlqeZD1JMn7bcyNE6stS50RUu5vyopzLFALnN0uTBftrZOcHpkRtYVa0ifz9fB9yKKJYw==}
     dev: false
 
   /@tauri-apps/api/1.2.0:
